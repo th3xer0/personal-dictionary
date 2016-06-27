@@ -45,10 +45,17 @@ packages/*
 .vagrant
 .vagrant/*
 
+# Others
 .env
 .tags
 .tags1
 .gan
+
+# Python Compiled Bytecode
+*.pyc
+
+# Dev / Test Files
 deployment-config.json
 dev-config.json
 dev-dictionary.txt
+
