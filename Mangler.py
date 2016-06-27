@@ -4,6 +4,7 @@
 """
 
 import re
+from itertools import product
 
 
 def number_swap(term):
@@ -16,28 +17,22 @@ def number_swap(term):
         :rtype: list
     """
     number_alt_dict = {
-        '0': ['O'],
-        '1': ['l'],
-        '2': ['Z'],
-        '3': ['E'],
-        '4': ['A'],
-        '5': ['S'],
-        '6': ['b', 'G'],
-        '7': ['T', 'L'],
-        '8': ['B'],
-        '9': ['g', 'q']
+        '0': 'O',
+        '1': 'l',
+        '2': 'Z',
+        '3': 'E',
+        '4': 'A',
+        '5': 'S',
+        '6': 'bG',
+        '7': 'TL',
+        '8': 'B',
+        '9': 'gq'
     }
     new_terms = []
-    marker = 0
-    while marker < len(term):
-        number_list = list(term)
-        if number_list[marker] in number_alt_dict:
-            for replace in number_alt_dict[number_list[marker]]:
-                number_list[marker] = replace
-                new_terms.append(''.join(number_list))
-        marker += 1
-
-    return new_terms
+    for character in term:
+        alt_number = number_alt_dict.get(character, character)
+        new_terms.append([character,] if alt_number == character else [char for char in ",".join(character + alt_number).split(",")])
+    return [''.join(t) for t in product(*new_terms)]
 
 
 def letter_swap(term):
@@ -51,30 +46,24 @@ def letter_swap(term):
     """
     term = term.lower()
     letter_alt_dict = {
-        'a': ['@', '4'],
-        'b': ['8'],
-        'c': ['('],
-        'e': ['3'],
-        'g': ['6', '9'],
-        'h': ['#'],
-        'i': ['!'],
-        'l': ['1'],
-        'o': ['0'],
-        's': ['5', '$'],
-        't': ['+', '7'],
-        'z': ['2']
+        'a': '@4',
+        'b': '8',
+        'c': '(',
+        'e': '3',
+        'g': '69',
+        'h': '#',
+        'i': '!1',
+        'l': '1!',
+        'o': '0',
+        's': '5$',
+        't': '+7',
+        'z': '2'
     }
     new_terms = []
-    marker = 0
-    while marker < len(term):
-        letter_list = list(term)
-        if letter_list[marker] in letter_alt_dict:
-            for replace in letter_alt_dict[letter_list[marker]]:
-                letter_list[marker] = replace
-                new_terms.append(''.join(letter_list))
-        marker += 1
-
-    return new_terms
+    for character in term:
+        alt_letter = letter_alt_dict.get(character, character)
+        new_terms.append([character,] if alt_letter == character else [char for char in ",".join(character + alt_letter).split(",")])
+    return [''.join(t) for t in product(*new_terms)]
 
 
 def alternate_case(term, first):
