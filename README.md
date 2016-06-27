@@ -33,6 +33,8 @@ optional arguments:
 
 ## Future Features
 
+More numbers (besides phone, street, year, and ZIP (e.g. favorite numbers and dates (MM/DD))
+
 Weighting of category significance.
 
 Sub categories with common phrases.
