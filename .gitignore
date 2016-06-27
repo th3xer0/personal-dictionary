@@ -50,3 +50,5 @@ packages/*
 .tags1
 .gan
 deployment-config.json
+dev-config.json
+dev-dictionary.txt
