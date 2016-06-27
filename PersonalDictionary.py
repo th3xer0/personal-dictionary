@@ -2,10 +2,11 @@
 
 """
     Author: John Vardanian
-    Last Modified: 2016-06-25
+    Forked by: th3xer0
+    Last Modified: 2016-06-26
     Python3.5 using PyCharm / Atom / Sublime Text 3
 
-    r0.1.3.1-2016.06.25(a)
+    r0.1-2016.06.26(a)
 
     Generate a dictionary list as a text file using permutations of terms
     stored in json file. Terms are intended to be accumulated during
@@ -40,14 +41,14 @@ def main():
                         help='Minimum password length')
     parser.add_argument('--max', type=int, required=True,
                         help='Maximum password length')
-    parser.add_argument('-n', '--num', type=int, required=True,
+    parser.add_argument('-n', '--num', type=int,
                         help='Number of passwords to be generated')
     parser.add_argument('-f', '--file', required=True, help='Criteria file')
     parser.add_argument('-o', '--out', help='Generated password file')
     args = parser.parse_args()
     min_length = args.min
     max_length = args.max
-    password_count = args.num
+    password_count = args.num if args.num else 0
     output_file = args.out if args.out else "dictionary.txt"
 
     try:
@@ -210,7 +211,7 @@ def main():
         count = 0
         with open(output_file, 'w+') as my_file:
             for word in final_collection:
-                if count == password_count:
+                if count == password_count and password_count != 0:
                     break
                 my_file.write(word + '\n')
                 count += 1
